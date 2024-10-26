@@ -1,3 +1,5 @@
+// Credits to Chase Kaiser for code from "Fake Hacking Program" at CodePen
+
 window.onload = () => {
     var titles = ["BUSCANDO...", "¡VIRUS!"];
     var favicons = ["fire.svg", "bomb.svg"]
@@ -7,7 +9,7 @@ window.onload = () => {
 
     var titleInterval = setInterval(() => {
         document.title = titles[index];
-        favicon.href = favicons[index];
+        favicon.href = "static\\svg\\" + favicons[index];
         index = (index + 1) % titles.length;
     }, 1000);
     
