@@ -14,8 +14,6 @@ class Email:
     def __init__(self, address: str, password: str) -> None:
         self.address = address
         self.password = password
-        self.context: SSLContext = ssl.create_default_context()
-        self.server: SMTP_SSL
 
     def send_massive_email(self, subject: str, receivers: list[str], text: str, html: str, uploads: list[str], priority: Literal["1", "3", "5"] = "5") -> None:
         success: bool = True
@@ -29,7 +27,7 @@ class Email:
     def send_email(self, subject: str, receiver: str, text: str, html: str, attachments: dict[str, bytes], priority: Literal["1", "3", "5"] = "5") -> bool:
 
         try:
-            with SMTP_SSL("smtp.gmail.com", 465, context=self.context) as server:
+            with SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as server:
                 server.login(self.address, self.password)
 
                 email = MIMEMultipart("alternative")
@@ -48,17 +46,15 @@ class Email:
                 email.attach(html_body)
 
                 for attachment_name, attachment_bytes in attachments.items():
-                    application = MIMEBase("application", "octet-stream")
-                    application.set_payload(attachment_bytes)
-                    encoders.encode_base64(application)
-                    application.add_header("Content-Disposition", f"attachment; filename= {attachment_name}")
+                    application = MIMEApplication(attachment_bytes, Name=attachment_name)
+                    application["Content-Disposition"] = f'attachment; filename="{attachment_name}"'
                     email.attach(application)
 
                 server.sendmail(self.address, receiver, email.as_string())
 
                 print(f'Email "{subject}" sent to {receiver}')
 
-                return True
+            return True
 
         except Exception as e:
             print(f'Error sending email "{subject}" to {receiver}: {e}')
