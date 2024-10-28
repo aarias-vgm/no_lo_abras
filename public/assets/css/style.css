@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+@font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(http://themes.googleusercontent.com/static/fonts/sourcecodepro/v4/mrl8jkM18OlOQN8JLgasDxM0YzuT7MdOe03otPbuUS0.woff) format('woff');
+}
+
+body {
+    font-family: Source Code Pro;
+    background:#000;
+    color: red;
+    margin:0;
+    font-size: 13px;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+canvas {
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.bars-and-stuff{
+    left:66.6%;
+}
+
+.output-console {
+    position:fixed;
+    overflow:hidden;
+}
+
+p{
+    margin:0
+}
+
+.troll_hacking, .pdf_preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.troll_hacking {
+    transition: opacity 1s ease;
+    width: 100%;
+    height: 100%;
+    background-color: black !important;
+    z-index: 2;
+}
+
+.pdf_preview {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+    z-index: 1;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
