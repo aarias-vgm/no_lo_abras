@@ -24,10 +24,13 @@ class Reader:
 
     @staticmethod
     def read_plain_text_file(path: str, name: str) -> str:
-        text: str
         with open(f"{Utils.create_abs_path(path)}\\{name}", "r", encoding="utf-8") as file:
-            text = file.read()
-        return text
+            return file.read()
+
+    @staticmethod
+    def get_plain_text_file_lines(path: str, name: str) -> list[str]:
+        with open(f"{Utils.create_abs_path(path)}\\{name}", "r", encoding="utf-8") as file:
+            return file.readlines()
 
     @staticmethod
     def read_binary_file(path: str, name: str) -> bytes:
